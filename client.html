@@ -1,0 +1,23 @@
+<html>
+<head>
+    <script>
+        if (typeof(WebSocket) !== 'undefined') {
+            theWebSocket = WebSocket;
+        } else if (typeof(MozWebSocket) !== 'undefined') {
+            theWebSocket = MozWebSocket;
+        } else {
+            alert('Your browser does not have WebSocket support, please try Chrome, Safari or Firefox ≥ 6. Firefox 4 and 5 are also supported by you have to enable WebSockets in about:config.');
+        };
+        var ws = new theWebSocket("ws://localhost:55551/ws");
+        ws.onopen = function() {
+                ws.send("connected");
+        };
+        ws.onmessage = function(event) {
+                //alert("The server sent a message: " + event.data);
+                eval(event.data)
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>
